@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'LXCProgressHUD_Example' do
+  pod 'LXCProgressHUD', :path => '../'
+
+  target 'LXCProgressHUD_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
