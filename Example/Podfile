@@ -1,8 +1,8 @@
 use_frameworks!
-
+platform :ios, '8.0'
 target 'LXCProgressHUD_Example' do
   pod 'LXCProgressHUD', :path => '../'
-
+  
   target 'LXCProgressHUD_Tests' do
     inherit! :search_paths
 

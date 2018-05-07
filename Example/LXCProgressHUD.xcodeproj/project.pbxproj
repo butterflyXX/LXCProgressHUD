@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33EA877A20A02E9C00B72579 /* LXCTwoVcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EA877920A02E9C00B72579 /* LXCTwoVcViewController.m */; };
 		4BBA356DCC3399C351B06F9E /* Pods_LXCProgressHUD_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81792F35F3272CF5CE42195B /* Pods_LXCProgressHUD_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		223AE0C2FEA2B0A4CE2D1EBC /* Pods-LXCProgressHUD_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCProgressHUD_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXCProgressHUD_Example/Pods-LXCProgressHUD_Example.release.xcconfig"; sourceTree = "<group>"; };
+		33EA877820A02E9C00B72579 /* LXCTwoVcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXCTwoVcViewController.h; sourceTree = "<group>"; };
+		33EA877920A02E9C00B72579 /* LXCTwoVcViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCTwoVcViewController.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* LXCProgressHUD_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCProgressHUD_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,12 +64,12 @@
 		81792F35F3272CF5CE42195B /* Pods_LXCProgressHUD_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXCProgressHUD_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		819C57E2DA5AD684F55CB0AF /* Pods_LXCProgressHUD_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXCProgressHUD_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8F0A52CE5EB1952EB2BD81C4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		8F0A52CE5EB1952EB2BD81C4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A1E947067BBFB77AA93C1AF8 /* Pods-LXCProgressHUD_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCProgressHUD_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXCProgressHUD_Example/Pods-LXCProgressHUD_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AF771B1C34C8D9FEB3B192BC /* Pods-LXCProgressHUD_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCProgressHUD_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXCProgressHUD_Tests/Pods-LXCProgressHUD_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF52ED6DF7B978A2AF995B18 /* Pods-LXCProgressHUD_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXCProgressHUD_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXCProgressHUD_Tests/Pods-LXCProgressHUD_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		C4387173754C08CBF4869A4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		CB367D3B9460446300BEC3C8 /* LXCProgressHUD.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = LXCProgressHUD.podspec; path = ../LXCProgressHUD.podspec; sourceTree = "<group>"; };
+		C4387173754C08CBF4869A4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		CB367D3B9460446300BEC3C8 /* LXCProgressHUD.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LXCProgressHUD.podspec; path = ../LXCProgressHUD.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* LXCViewController.h */,
 				6003F5A6195388D20070C39A /* LXCViewController.m */,
+				33EA877820A02E9C00B72579 /* LXCTwoVcViewController.h */,
+				33EA877920A02E9C00B72579 /* LXCTwoVcViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -247,6 +252,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = butterflyXX;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = LWJ6MASW42;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -302,10 +310,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LXCProgressHUD_Example/Pods-LXCProgressHUD_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/LXCProgressHUD/LXCProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LXCProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -356,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* LXCAppDelegate.m in Sources */,
+				33EA877A20A02E9C00B72579 /* LXCTwoVcViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* LXCViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -485,9 +498,11 @@
 			baseConfigurationReference = A1E947067BBFB77AA93C1AF8 /* Pods-LXCProgressHUD_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LWJ6MASW42;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LXCProgressHUD/LXCProgressHUD-Prefix.pch";
 				INFOPLIST_FILE = "LXCProgressHUD/LXCProgressHUD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -500,9 +515,11 @@
 			baseConfigurationReference = 223AE0C2FEA2B0A4CE2D1EBC /* Pods-LXCProgressHUD_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LWJ6MASW42;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LXCProgressHUD/LXCProgressHUD-Prefix.pch";
 				INFOPLIST_FILE = "LXCProgressHUD/LXCProgressHUD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

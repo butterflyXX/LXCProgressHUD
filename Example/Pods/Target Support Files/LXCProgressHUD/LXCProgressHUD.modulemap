@@ -1,0 +1,6 @@
+framework module LXCProgressHUD {
+  umbrella header "LXCProgressHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}
