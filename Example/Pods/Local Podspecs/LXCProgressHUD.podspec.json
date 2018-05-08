@@ -1,6 +1,6 @@
 {
   "name": "LXCProgressHUD",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "summary": "LXCProgressHUD",
   "description": "LXCProgressHUD的描述文件",
   "homepage": "https://github.com/butterflyXX/LXCProgressHUD",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/butterflyXX/LXCProgressHUD.git",
-    "tag": "1.0.1"
+    "tag": "1.1.0"
   },
   "platforms": {
     "ios": "8.0"

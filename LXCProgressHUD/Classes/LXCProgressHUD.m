@@ -10,92 +10,122 @@
 
 @implementation LXCProgressHUD
 
-+ (instancetype)waiting:(NSString *)string toView:(UIView *)view {
++(instancetype)sharedHUDManager {
+    static id instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [self new];
+        
+    });
+    return instance;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+//    self.square = YES;
+    self.minSize = CGSizeMake(120, 10);
+    return self;
+}
+
+- (instancetype)waiting:(NSString *)string toView:(UIView *)view {
+//
+    
     if (view == nil)
         view = [[UIApplication sharedApplication].windows lastObject];
     // 快速显示一个提示信息
     LXCProgressHUD *hud = [LXCProgressHUD showHUDAddedTo:view animated:YES];
     // 再设置模式
     hud.mode = MBProgressHUDModeCustomView;
-    //    hud.mode = MBProgressHUDModeText;
     hud.label.text = string;
-    hud.contentColor = [UIColor whiteColor];
+    [self setHUD:hud];
     
-    NSBundle *bundle = [NSBundle bundleForClass:[LXCProgressHUD class]];
-    NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
-    NSBundle *imageBundle = [NSBundle bundleWithURL:url];
-    UIImage *image = [[UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"loading" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    //    UIImage *image = [UIImage imageNamed:@"Checkmark"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
+    NSArray<UIImage *> *imageArray = [self getGifWithImageStringArray:[LXCProgressHUD sharedHUDManager].waitingImageStringArray];
+    if (imageArray.count == 1) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:imageArray.lastObject];
+        hud.customView = imageView;  // 设置图片
+    }else if (imageArray.count > 1) {
+        UIImageView *imageView = [UIImageView new];
+        imageView.animationImages = imageArray;
+        imageView.animationRepeatCount = MAXFLOAT;
+        imageView.animationDuration = imageArray.count/[LXCProgressHUD sharedHUDManager].waitFrequency;
+        [imageView startAnimating];
+        hud.customView = imageView;  // 设置图片
+    } else {
+        NSBundle *bundle = [NSBundle bundleForClass:[LXCProgressHUD class]];
+        NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
+        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        UIImage *image = [[UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"loading" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
         anima.toValue = @(M_PI*2);
         anima.duration = 1.0f;
         anima.repeatCount = 100;
         [imageView.layer addAnimation:anima forKey:nil];
-    hud.customView = imageView;  // 设置图片
-    //    hud.customView.backgroundColor = [UIColor whiteColor];
-    hud.bezelView.backgroundColor = [UIColor blackColor];    //背景颜色
-    hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+        hud.customView = imageView;  // 设置图片
+    }
 
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     return hud;
 }
 
-- (void)showSuccess:(NSString *)text
+- (void)showSuccess:(NSString *)text complete:(LXCComplete)complete
 {
-    // 再设置模式
-    self.mode = MBProgressHUDModeCustomView;
-    //    hud.mode = MBProgressHUDModeText;
+    self.completionBlock = complete;
     self.label.text = text;
-    self.contentColor = [UIColor whiteColor];
     
-    NSBundle *bundle = [NSBundle bundleForClass:[LXCProgressHUD class]];
+    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"LXCProgressHUD")];
     NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
     NSBundle *imageBundle = [NSBundle bundleWithURL:url];
     UIImage *image = [[UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"Checkmark" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    UIImage *userImage = [UIImage imageNamed:[LXCProgressHUD sharedHUDManager].successImageString];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:userImage ? userImage : image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.customView = imageView;  // 设置图片
-    self.bezelView.backgroundColor = [UIColor blackColor];    //背景颜色
-    self.bezelView.style = MBProgressHUDBackgroundStyleBlur;
     //     1秒之后再消失
-    [self hideAnimated:YES afterDelay:1];
-    
+    [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 1:[LXCProgressHUD sharedHUDManager].time];
 }
 
 /**
  *  =======显示错误信息
  */
-- (void)showError:(NSString *)text {
-//    error
+- (void)showError:(NSString *)text complete:(LXCComplete)complete {
+    self.completionBlock = complete;
+    //    error
     // 再设置模式
-    self.mode = MBProgressHUDModeCustomView;
-    //    hud.mode = MBProgressHUDModeText;
     self.label.text = text;
-    self.contentColor = [UIColor whiteColor];
-    NSBundle *bundle = [NSBundle bundleForClass:[LXCProgressHUD class]];
+    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"LXCProgressHUD")];
     NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
     NSBundle *imageBundle = [NSBundle bundleWithURL:url];
     UIImage *image = [[UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    UIImage *userImage = [UIImage imageNamed:[LXCProgressHUD sharedHUDManager].errorImageString];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:userImage ? userImage : image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.customView = imageView;  // 设置图片
-    self.bezelView.backgroundColor = [UIColor blackColor];    //背景颜色
-    self.bezelView.style = MBProgressHUDBackgroundStyleBlur;
     //     1秒之后再消失
-    [self hideAnimated:YES afterDelay:1];
+    [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 1:[LXCProgressHUD sharedHUDManager].time];
 }
 
-- (void)showMessage:(NSString *)message {
+- (void)showMessage:(NSString *)message complete:(LXCComplete)complete {
+    self.completionBlock = complete;
     self.mode = MBProgressHUDModeText;
     self.label.text = message;
-    self.contentColor = [UIColor whiteColor];
-    self.bezelView.backgroundColor = [UIColor blackColor];    //背景颜色
-    self.bezelView.style = MBProgressHUDBackgroundStyleBlur;
     //     1秒之后再消失
-    [self hideAnimated:YES afterDelay:1];
+    [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 2:[LXCProgressHUD sharedHUDManager].time];
+}
+
+-(void) setHUD:(MBProgressHUD *)hud {
+    hud.contentColor = [LXCProgressHUD sharedHUDManager].tintColor ? [LXCProgressHUD sharedHUDManager].tintColor : [UIColor whiteColor];
+    hud.bezelView.backgroundColor = [LXCProgressHUD sharedHUDManager].backColor ? [LXCProgressHUD sharedHUDManager].backColor : [UIColor blackColor];    //背景颜色
+}
+
+-(NSArray<UIImage *> *) getGifWithImageStringArray:(NSArray<NSString *> *)array {
+    NSMutableArray<UIImage *> *gifArray = [NSMutableArray new];
+    for (NSString *imageString in array) {
+        UIImage *image = [UIImage imageNamed:imageString];
+        [gifArray addObject:image];
+    }
+    return gifArray.copy;
 }
 @end

@@ -28,15 +28,24 @@
     [jumpButton addTarget:self action:@selector(jumpButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:jumpButton];
     self.view.backgroundColor = [UIColor greenColor];
+    NSMutableArray<NSString *> *stringArray = [NSMutableArray new];
+    for (int i = 1; i <= 14; i++) {
+        [stringArray addObject:[[NSString alloc] initWithFormat:@"offWork0%02d",i]];
+    }
+//    [LXCProgressHUD sharedHUDManager].waitingImageStringArray = stringArray;
+//    [LXCProgressHUD sharedHUDManager].successImageString = @"offWork001";
+//    [LXCProgressHUD sharedHUDManager].waitFrequency = 7.0;
 }
 
 -(void)buttonAction {
     NSLog(@"点击了按钮");
-    LXCProgressHUD *hud = [LXCProgressHUD waiting:@"正在加载中..." toView:nil];
+    LXCProgressHUD *hud = [[LXCProgressHUD sharedHUDManager] waiting:@"正在加载中..." toView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [hud showMessage:@"信息错误"];
+        [hud showSuccess:@"成功" complete:^{
+            NSLog(@"显示结束");
+            [self jumpButtonAction];
+        }];
     });
-//    [SVProgressHUD showWithStatus:@""];
 }
 
 -(void)jumpButtonAction {
