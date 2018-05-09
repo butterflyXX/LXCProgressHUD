@@ -7,7 +7,7 @@
 //
 
 #import "LXCTwoVcViewController.h"
-
+#import "AILoadingView.h"
 @interface LXCTwoVcViewController ()
 
 @end
@@ -35,6 +35,12 @@
 //    [LXCProgressHUD sharedHUDManager].waitingImageStringArray = stringArray;
 //    [LXCProgressHUD sharedHUDManager].successImageString = @"offWork001";
 //    [LXCProgressHUD sharedHUDManager].waitFrequency = 7.0;
+    
+//    AILoadingView *loadingView = [[AILoadingView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    loadingView.strokeColor = [LXCProgressHUD sharedHUDManager].tintColor ? [LXCProgressHUD sharedHUDManager].tintColor : [UIColor whiteColor];
+//    [loadingView starAnimation];
+//    [self.view addSubview:loadingView];
+//    loadingView.center = self.view.center;
 }
 
 -(void)buttonAction {

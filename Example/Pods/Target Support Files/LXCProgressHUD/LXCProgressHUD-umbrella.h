@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "AILoadingView.h"
 #import "LXCProgressHUD.h"
 
 FOUNDATION_EXPORT double LXCProgressHUDVersionNumber;

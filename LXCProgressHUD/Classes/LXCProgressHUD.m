@@ -7,6 +7,13 @@
 //
 
 #import "LXCProgressHUD.h"
+#import "AILoadingView.h"
+
+@interface LXCProgressHUD ()
+
+@property (nonatomic,weak)AILoadingView *loadingView;
+
+@end
 
 @implementation LXCProgressHUD
 
@@ -37,6 +44,7 @@
     // 再设置模式
     hud.mode = MBProgressHUDModeCustomView;
     hud.label.text = string;
+    hud.label.font = [UIFont systemFontOfSize:14];
     [self setHUD:hud];
     
     NSArray<UIImage *> *imageArray = [self getGifWithImageStringArray:[LXCProgressHUD sharedHUDManager].waitingImageStringArray];
@@ -51,17 +59,16 @@
         [imageView startAnimating];
         hud.customView = imageView;  // 设置图片
     } else {
-        NSBundle *bundle = [NSBundle bundleForClass:[LXCProgressHUD class]];
+        AILoadingView *loadingView = [[AILoadingView alloc] initWithFrame:CGRectMake(7.5, 7.5, 30, 30)];
+        loadingView.strokeColor = [LXCProgressHUD sharedHUDManager].tintColor ? [LXCProgressHUD sharedHUDManager].tintColor : [UIColor whiteColor];
+        loadingView.tag = 100;
+        hud.loadingView = loadingView;
+        NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"LXCProgressHUD")];
         NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
         NSBundle *imageBundle = [NSBundle bundleWithURL:url];
-        UIImage *image = [[UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"loading" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *image = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"back" ofType:@"png"]];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        anima.toValue = @(M_PI*2);
-        anima.duration = 1.0f;
-        anima.repeatCount = 100;
-        [imageView.layer addAnimation:anima forKey:nil];
+        [imageView addSubview:loadingView];
         hud.customView = imageView;  // 设置图片
     }
 
@@ -127,5 +134,19 @@
         [gifArray addObject:image];
     }
     return gifArray.copy;
+}
+
+-(void)dealloc {
+    NSLog(@"hud释放了");
+    if (self.loadingView) {
+        [self.loadingView stopAnimation];
+    }
+    if (self.customView) {
+        AILoadingView *loadingView = [self.customView viewWithTag:100];
+        if (loadingView) {
+            [loadingView stopAnimation];
+        }
+        [self.customView removeFromSuperview];
+    }
 }
 @end
