@@ -1,5 +1,5 @@
 PODS:
-  - LXCProgressHUD (1.1.1):
+  - LXCProgressHUD (1.1.2):
     - MBProgressHUD (~> 1.1.0)
   - MBProgressHUD (1.1.0)
 
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LXCProgressHUD: 262284e6c8c7c15059b0218b537bcb7818864da0
+  LXCProgressHUD: 434946fc679779074bb7c072263c12f1d47fb748
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
 
 PODFILE CHECKSUM: cb8e48904a0bfcb924f03886d5e30cfc978b5565

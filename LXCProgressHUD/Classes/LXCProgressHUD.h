@@ -48,4 +48,7 @@ typedef void((^LXCComplete)(void));
 //显示信息
 - (void)showMessage:(NSString *)message complete:(LXCComplete)complete;
 
+//结束
+-(void)endShowingWithcomplete:(LXCComplete)complete;
+
 @end

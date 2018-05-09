@@ -81,7 +81,6 @@
 {
     self.completionBlock = complete;
     self.label.text = text;
-    
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"LXCProgressHUD")];
     NSURL *url = [bundle URLForResource:@"LXCProgressHUD" withExtension:@"bundle"];
     NSBundle *imageBundle = [NSBundle bundleWithURL:url];
@@ -90,6 +89,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:userImage ? userImage : image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.customView = imageView;  // 设置图片
+    [self endWaiting];
     //     1秒之后再消失
     [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 1:[LXCProgressHUD sharedHUDManager].time];
 }
@@ -110,6 +110,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:userImage ? userImage : image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.customView = imageView;  // 设置图片
+    [self endWaiting];
     //     1秒之后再消失
     [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 1:[LXCProgressHUD sharedHUDManager].time];
 }
@@ -118,6 +119,7 @@
     self.completionBlock = complete;
     self.mode = MBProgressHUDModeText;
     self.label.text = message;
+    [self endWaiting];
     //     1秒之后再消失
     [self hideAnimated:YES afterDelay:[LXCProgressHUD sharedHUDManager].time == 0 ? 2:[LXCProgressHUD sharedHUDManager].time];
 }
@@ -136,17 +138,15 @@
     return gifArray.copy;
 }
 
--(void)dealloc {
-    NSLog(@"hud释放了");
+-(void)endWaiting {
     if (self.loadingView) {
         [self.loadingView stopAnimation];
     }
-    if (self.customView) {
-        AILoadingView *loadingView = [self.customView viewWithTag:100];
-        if (loadingView) {
-            [loadingView stopAnimation];
-        }
-        [self.customView removeFromSuperview];
-    }
+}
+
+-(void)endShowingWithcomplete:(LXCComplete)complete {
+    self.completionBlock = complete;
+    [self endWaiting];
+    [self hideAnimated:YES];
 }
 @end

@@ -47,7 +47,11 @@
     NSLog(@"点击了按钮");
     LXCProgressHUD *hud = [[LXCProgressHUD sharedHUDManager] waiting:@"正在加载中..." toView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [hud showSuccess:@"成功" complete:^{
+//        [hud showSuccess:@"成功" complete:^{
+//            NSLog(@"显示结束");
+//            [self jumpButtonAction];
+//        }];
+        [hud endShowingWithcomplete:^{
             NSLog(@"显示结束");
             [self jumpButtonAction];
         }];
