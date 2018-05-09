@@ -99,6 +99,12 @@
     self.loadingLayer.strokeColor  = strokeColor.CGColor;
 }
 
+-(void)willMoveToWindow:(UIWindow *)newWindow {
+    if (newWindow == nil) {
+        [self stopAnimation];
+    }
+}
+
 -(void)dealloc {
     NSLog(@"释放了");
 }
